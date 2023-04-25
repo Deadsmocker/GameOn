@@ -30,6 +30,7 @@ const emailError = document.getElementById("emailError");
 const birthdate = document.getElementById("birthdate"); 
 const birthdateError = document.getElementById("birthdateError");
 
+
 const quantity = document.getElementById("quantity");
 const quantityError = document.getElementById("quantityError");
 
@@ -120,6 +121,21 @@ function checkInputs(){
     email.style = "default";
   }
 
+
+  
+let age = new Date().getFullYear() - new Date(birthdate.value).getFullYear();
+  if(age < 12) {
+    birthdateError.textContent =  "Vous n'avez pas l'âge requis";
+    birthdateError.style.color = "red";
+    birthdateError.style.fontSize = "10px";
+    birthdate.style.borderColor = "red";
+    birthdate.style.borderWidth = "2px";
+    return formOk === false;
+  } else {
+    birthdateError.style.display = "none";
+    birthdate.style = "default";
+  }
+
   if(!birthdate.value) {
     birthdateError.textContent =  "Veuillez entrer votre date de naissance";
     birthdateError.style.color = "red";
@@ -131,6 +147,8 @@ function checkInputs(){
     birthdateError.style.display = "none";
     birthdate.style = "default";
   }
+
+
 
   // if quantity.value is empty or its value is not a number = error
   if(quantity.value === "" || isNaN(quantity.value)) {
